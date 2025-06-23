@@ -19,8 +19,6 @@ const ProductTable: React.FC = () => {
   const { exportToPdf } = usePdfExport();
   const { tertiaryColor } = useSupplierTheme();
   const [data, setData] = useState<Product[]>([]);
-  const [editingCell, setEditingCell] = useState<{ id: string, columnId: string } | null>(null);
-  const [editValue, setEditValue] = useState<string>('');
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
 
   // Filter products based on search term and selected filters
@@ -50,35 +48,7 @@ const ProductTable: React.FC = () => {
     setData(filteredProducts);
   }, [filteredProducts]);
 
-  const handleEditCell = (id: string, columnId: string, value: any, e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent row click when editing cell
-    setEditingCell({ id, columnId });
-    setEditValue(value?.toString() || '');
-  };
-
-  const handleSaveEdit = (id: string, columnId: string) => {
-    setEditingCell(null);
-    
-    const updatedProduct = products.find(p => p.id === id);
-    if (!updatedProduct) return;
-    
-    let newValue: any = editValue;
-    
-    // Convert value based on column type
-    if (columnId === 'price') {
-      newValue = parseFloat(editValue) || 0;
-    } else if (columnId === 'available') {
-      newValue = editValue === 'true';
-    }
-    
-    const updatedRow = {
-      ...updatedProduct,
-      [columnId]: newValue,
-      updatedAt: new Date().toISOString()
-    };
-    
-    updateProduct(updatedRow);
-  };
+  // Removed edit functionality as users should not be able to edit rows
 
   const handleExportClick = async () => {
     try {
@@ -111,27 +81,10 @@ const ProductTable: React.FC = () => {
       header: 'Product Name',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
         const hasImage = !!info.row.original.imageUrl;
         
-        if (editingCell && editingCell.id === id && editingCell.columnId === 'name') {
-          return (
-            <input
-              className="w-full p-1 border border-blue-400 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              onBlur={() => handleSaveEdit(id, 'name')}
-              autoFocus
-              onClick={e => e.stopPropagation()}
-            />
-          );
-        }
-        
         return (
-          <div 
-            className="p-1 cursor-pointer hover:bg-gray-100 flex items-center" 
-            onClick={(e) => handleEditCell(id, 'name', value, e)}
-          >
+          <div className="p-1 flex items-center">
             {hasImage && (
               <span className="mr-2 text-blue-500">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -148,25 +101,10 @@ const ProductTable: React.FC = () => {
       header: 'Description',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
-        
-        if (editingCell && editingCell.id === id && editingCell.columnId === 'description') {
-          return (
-            <input
-              className="w-full p-1 border border-blue-400 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              onBlur={() => handleSaveEdit(id, 'description')}
-              autoFocus
-              onClick={e => e.stopPropagation()}
-            />
-          );
-        }
         
         return (
           <div 
-            className="p-1 cursor-pointer hover:bg-gray-100 truncate max-w-xs" 
-            onClick={(e) => handleEditCell(id, 'description', value, e)}
+            className="p-1 truncate max-w-xs" 
             title={value}
           >
             {value}
@@ -178,26 +116,9 @@ const ProductTable: React.FC = () => {
       header: 'Category',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
-        
-        if (editingCell && editingCell.id === id && editingCell.columnId === 'category') {
-          return (
-            <input
-              className="w-full p-1 border border-blue-400 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              onBlur={() => handleSaveEdit(id, 'category')}
-              autoFocus
-              onClick={e => e.stopPropagation()}
-            />
-          );
-        }
         
         return (
-          <div 
-            className="p-1 cursor-pointer hover:bg-gray-100" 
-            onClick={(e) => handleEditCell(id, 'category', value, e)}
-          >
+          <div className="p-1">
             {value}
           </div>
         );
@@ -207,26 +128,9 @@ const ProductTable: React.FC = () => {
       header: 'Supplier',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
-        
-        if (editingCell && editingCell.id === id && editingCell.columnId === 'supplier') {
-          return (
-            <input
-              className="w-full p-1 border border-blue-400 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              onBlur={() => handleSaveEdit(id, 'supplier')}
-              autoFocus
-              onClick={e => e.stopPropagation()}
-            />
-          );
-        }
         
         return (
-          <div 
-            className="p-1 cursor-pointer hover:bg-gray-100" 
-            onClick={(e) => handleEditCell(id, 'supplier', value, e)}
-          >
+          <div className="p-1">
             {value}
           </div>
         );
@@ -236,29 +140,10 @@ const ProductTable: React.FC = () => {
       header: 'Price',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
-        const displayValue = value !== undefined && typeof value === 'number' ? `$${value.toFixed(2)}` : '';
-        
-        if (editingCell && editingCell.id === id && editingCell.columnId === 'price') {
-          return (
-            <input
-              className="w-full p-1 border border-blue-400 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              onBlur={() => handleSaveEdit(id, 'price')}
-              autoFocus
-              type="number"
-              step="0.01"
-              onClick={e => e.stopPropagation()}
-            />
-          );
-        }
+        const displayValue = value !== undefined && typeof value === 'number' ? `$${value.toFixed(2)}` : (value || '');
         
         return (
-          <div 
-            className="p-1 cursor-pointer hover:bg-gray-100" 
-            onClick={(e) => handleEditCell(id, 'price', value, e)}
-          >
+          <div className="p-1">
             {displayValue}
           </div>
         );
@@ -268,26 +153,9 @@ const ProductTable: React.FC = () => {
       header: 'Unit',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
-        
-        if (editingCell && editingCell.id === id && editingCell.columnId === 'unit') {
-          return (
-            <input
-              className="w-full p-1 border border-blue-400 rounded"
-              value={editValue}
-              onChange={e => setEditValue(e.target.value)}
-              onBlur={() => handleSaveEdit(id, 'unit')}
-              autoFocus
-              onClick={e => e.stopPropagation()}
-            />
-          );
-        }
         
         return (
-          <div 
-            className="p-1 cursor-pointer hover:bg-gray-100" 
-            onClick={(e) => handleEditCell(id, 'unit', value, e)}
-          >
+          <div className="p-1">
             {value}
           </div>
         );
@@ -297,23 +165,20 @@ const ProductTable: React.FC = () => {
       header: 'Available',
       cell: info => {
         const value = info.getValue();
-        const id = info.row.original.id;
         
         return (
-          <div className="flex justify-center" onClick={e => e.stopPropagation()}>
-            <input
-              type="checkbox"
-              checked={value}
-              onChange={() => {
-                const updatedRow = {
-                  ...info.row.original,
-                  available: !value,
-                  updatedAt: new Date().toISOString()
-                };
-                updateProduct(updatedRow);
-              }}
-              className="w-4 h-4"
-            />
+          <div className="flex justify-center">
+            {value ? (
+              <span className="inline-flex items-center">
+                <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                <span>Yes</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center">
+                <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                <span>No</span>
+              </span>
+            )}
           </div>
         );
       },
@@ -339,7 +204,7 @@ const ProductTable: React.FC = () => {
         );
       },
     }),
-  ], [editingCell, editValue]);
+  ], []);
 
   const table = useReactTable({
     data,
@@ -476,7 +341,7 @@ const ProductTable: React.FC = () => {
       </div>
       
       <div className="text-sm text-gray-500 mt-2">
-        Click on any cell to edit. Click on a row or the view button to see product details. Changes are stored in the session only and won't affect the original data.
+        Click on a row or the view button to see detailed product information.
       </div>
 
       {detailProduct && (
