@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { useStore } from '@/store';
 import { Product } from '@/types';
 
@@ -9,6 +10,7 @@ interface ProductDetailProps {
 
 const ProductDetail: React.FC<ProductDetailProps> = ({ product, onClose }) => {
   const { updateProduct } = useStore();
+  const [imageError, setImageError] = React.useState(false);
 
   const handleInquiryClick = () => {
     const subject = encodeURIComponent(`Inquiry about ${product.name}`);
@@ -47,12 +49,18 @@ Thank you,
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Product Image */}
             <div className="flex items-center justify-center bg-gray-100 rounded-lg p-4 h-80">
-              {product.imageUrl ? (
-                <img 
-                  src={product.imageUrl} 
-                  alt={product.name} 
-                  className="max-h-full max-w-full object-contain rounded-md"
-                />
+              {product.imageUrl && !imageError ? (
+                <div className="relative w-full h-full">
+                  <Image 
+                    src={product.imageUrl} 
+                    alt={product.name} 
+                    className="object-contain rounded-md"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    onError={() => setImageError(true)}
+                  />
+                </div>
               ) : (
                 <div className="flex flex-col items-center justify-center text-gray-400">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -101,6 +109,26 @@ Thank you,
                         )}
                       </dd>
                     </div>
+                    
+                    {product.item_number && (
+                      <div className="grid grid-cols-3 gap-4">
+                        <dt className="text-sm font-medium text-gray-500">Item Number</dt>
+                        <dd className="text-sm text-gray-900 col-span-2">{product.item_number}</dd>
+                      </div>
+                    )}
+                    
+                    {product.badges && product.badges.length > 0 && (
+                      <div className="grid grid-cols-3 gap-4">
+                        <dt className="text-sm font-medium text-gray-500">Badges</dt>
+                        <dd className="text-sm text-gray-900 col-span-2 flex flex-wrap gap-2">
+                          {product.badges.map((badge, index) => (
+                            <span key={index} className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                              {badge}
+                            </span>
+                          ))}
+                        </dd>
+                      </div>
+                    )}
                   </dl>
                 </div>
                 

@@ -83,15 +83,23 @@ export const usePdfExport = () => {
               // Wait for the image to load
               await new Promise((resolve, reject) => {
                 img.onload = resolve;
-                img.onerror = reject;
+                img.onerror = (err) => {
+                  console.warn(`Failed to load image: ${product.imageUrl}`, err);
+                  resolve(null); // Resolve with null instead of rejecting to continue processing
+                };
                 img.src = product.imageUrl || '';
+                
+                // Add timeout to prevent hanging on image load
+                setTimeout(() => {
+                  resolve(null);
+                }, 3000);
               });
               
               // Create a canvas to draw the image
               const canvas = document.createElement('canvas');
               const ctx = canvas.getContext('2d');
               
-              if (ctx) {
+              if (ctx && img.width > 0 && img.height > 0) {
                 canvas.width = img.width;
                 canvas.height = img.height;
                 ctx.drawImage(img, 0, 0);

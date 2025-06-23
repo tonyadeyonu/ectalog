@@ -37,10 +37,21 @@ export const useStore = create<StoreState>((set) => ({
       categoryProducts.forEach(product => {
         // Ensure each product has the category set correctly
         // and generate ID if not present
+        // Process properties to ensure they match our expected format
         products.push({
-          ...product,
-          category,
           id: product.id || uuidv4(),
+          name: product.name || '',
+          description: product.description || '',
+          category: category,
+          supplier: product.supplier || product.vendor || 'Unknown',
+          price: typeof product.price === 'string' ? parseFloat(product.price.replace(/[^0-9.]/g, '')) : product.price,
+          unit: product.unit || product.pack_size || '',
+          available: product.available !== undefined ? product.available : true,
+          imageUrl: product.image_url || product.imageUrl || product.image || '',
+          technicalDetails: product.technical_details || product.technicalDetails || '',
+          applications: Array.isArray(product.applications) ? product.applications : 
+                     (product.applications ? [product.applications] : []),
+          badges: product.badges || [],
           createdAt: product.createdAt || new Date().toISOString(),
           updatedAt: product.updatedAt || new Date().toISOString(),
         });

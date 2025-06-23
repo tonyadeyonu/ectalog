@@ -13,6 +13,9 @@ export interface Product {
   imageUrl?: string;
   technicalDetails?: string;
   applications?: string[];
+  badges?: string[];
+  item_number?: string;
+  url?: string;
   // Add any additional fields as needed
 }
 
