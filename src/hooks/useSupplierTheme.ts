@@ -22,7 +22,7 @@ const defaultTheme: SupplierTheme = {
   secondaryColor: '#0891b2', // Cyan
   tertiaryColor: '#f59e0b', // Amber
   logoUrl: '',
-  contactEmail: 'info@ecatalog-project.example.com',
+  contactEmail: 'hshahzad0277@gmail.com',
   contactPhone: '',
   website: '',
   isLoading: false,

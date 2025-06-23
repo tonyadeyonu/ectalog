@@ -56,7 +56,7 @@ const Layout: React.FC<LayoutProps> = ({ children, supplierId }) => {
               <div className="flex flex-col md:flex-row justify-center items-center gap-4">
                 <div>
                   <a 
-                    href="mailto:info@ecatalog-project.example.com"
+                    href="mailto:hshahzad0277@gmail.com"
                     className="text-blue-600 hover:underline"
                     style={footerLinkStyle}
                   >
