@@ -1,19 +1,26 @@
 import React, { useMemo } from 'react';
 import { useStore } from '@/store';
+import { useSupplierTheme } from '@/hooks/useSupplierTheme';
 
 const Filters: React.FC = () => {
   const { products, filters, setFilter, setSearchTerm, clearFilters } = useStore();
+  const { primaryColor } = useSupplierTheme();
   
-  // Extract unique categories and suppliers from products
+  // Extract unique categories from products
   const categories = useMemo(() => {
     const uniqueCategories = new Set(products.map(product => product.category));
     return Array.from(uniqueCategories).filter(Boolean).sort();
   }, [products]);
   
-  const suppliers = useMemo(() => {
-    const uniqueSuppliers = new Set(products.map(product => product.supplier));
-    return Array.from(uniqueSuppliers).filter(Boolean).sort();
-  }, [products]);
+  // Create dynamic styles using supplier theme
+  const buttonStyle = {
+    backgroundColor: primaryColor,
+    color: 'white',
+  };
+  
+  const focusRingStyle = {
+    '--ring-color': `${primaryColor}80`, // Add transparency for the ring
+  } as React.CSSProperties;
   
   return (
     <div className="mb-6 p-4 bg-gray-50 rounded-md border border-gray-200">
@@ -25,7 +32,8 @@ const Filters: React.FC = () => {
             placeholder="Search products..."
             value={filters.searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-opacity-50"
+            style={focusRingStyle}
           />
         </div>
         
@@ -34,7 +42,8 @@ const Filters: React.FC = () => {
           <select
             value={filters.category || ''}
             onChange={(e) => setFilter('category', e.target.value === '' ? null : e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-opacity-50 bg-white"
+            style={focusRingStyle}
           >
             <option value="">All Categories</option>
             {categories.map((category) => (
@@ -45,26 +54,11 @@ const Filters: React.FC = () => {
           </select>
         </div>
         
-        {/* Supplier Filter */}
-        <div className="w-full md:w-auto">
-          <select
-            value={filters.supplier || ''}
-            onChange={(e) => setFilter('supplier', e.target.value === '' ? null : e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-          >
-            <option value="">All Suppliers</option>
-            {suppliers.map((supplier) => (
-              <option key={supplier} value={supplier}>
-                {supplier}
-              </option>
-            ))}
-          </select>
-        </div>
-        
         {/* Clear Filters Button */}
         <button
           onClick={clearFilters}
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-md transition-colors"
+          className="px-4 py-2 hover:opacity-90 rounded-md transition-colors"
+          style={buttonStyle}
         >
           Clear Filters
         </button>

@@ -1,0 +1,10 @@
+{
+  "supplier_name": "Gourmet Ingredients Co.",
+  "primary_color": "#0e4c92",
+  "secondary_color": "#1e7b45",
+  "tertiary_color": "#e6a817",
+  "logo_url": "https://images.unsplash.com/photo-1471967183320-ee018f6e114a?w=600&auto=format&fit=crop",
+  "contact_email": "info@gourmetingredients.example.com",
+  "contact_phone": "+1 (555) 123-4567",
+  "website": "https://www.gourmetingredients.example.com"
+}
