@@ -46,11 +46,20 @@ export default function HomeClientPage() {
         </div>
       ) : (
         <>
-          <div className="mb-6">
-            <h1 className="text-2xl font-bold mb-2">eCatalog Project</h1>
-            <p className="text-gray-600">
-              Select a supplier below to browse their product catalog.
-            </p>
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold mb-3">eCatalog Project</h1>
+            <div className="space-y-2 text-gray-600">
+              <p>
+                Welcome to our collection of digital product catalogs for ingredient vendors and suppliers.
+              </p>
+              <p>
+                This platform hosts interactive eCatalogs previously created for different food and restaurant suppliers, 
+                allowing you to browse, search, and export their product inventories.
+              </p>
+              <p className="mt-4 font-medium">
+                Select a supplier below to browse their product catalog:
+              </p>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
