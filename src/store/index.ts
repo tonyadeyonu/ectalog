@@ -1,11 +1,13 @@
 import { create } from 'zustand';
-import { Product, StoreState } from '@/types';
+import { Product, StoreState, CategoryProducts } from '@/types';
+import { v4 as uuidv4 } from 'uuid';
 
 // Create the store with Zustand
 export const useStore = create<StoreState>((set) => ({
   // Data states
   originalProducts: [],
   products: [],
+  selectedProduct: null,
   
   // UI states
   isLoading: false,
@@ -27,6 +29,31 @@ export const useStore = create<StoreState>((set) => ({
     });
   },
   
+  setProductsFromCategoryStructure: (categoryData: CategoryProducts) => {
+    // Convert category-structured data to flat array
+    const products: Product[] = [];
+    
+    Object.entries(categoryData).forEach(([category, categoryProducts]) => {
+      categoryProducts.forEach(product => {
+        // Ensure each product has the category set correctly
+        // and generate ID if not present
+        products.push({
+          ...product,
+          category,
+          id: product.id || uuidv4(),
+          createdAt: product.createdAt || new Date().toISOString(),
+          updatedAt: product.updatedAt || new Date().toISOString(),
+        });
+      });
+    });
+    
+    set({ 
+      originalProducts: products,
+      products,
+      isLoading: false,
+    });
+  },
+  
   resetToOriginal: () => {
     set((state) => ({ 
       products: [...state.originalProducts],
@@ -35,6 +62,7 @@ export const useStore = create<StoreState>((set) => ({
         supplier: null,
         searchTerm: '',
       },
+      selectedProduct: null,
     }));
   },
   
@@ -43,7 +71,14 @@ export const useStore = create<StoreState>((set) => ({
       products: state.products.map(product => 
         product.id === updatedProduct.id ? updatedProduct : product
       ),
+      // If the updated product is the selected one, update it in the state
+      selectedProduct: state.selectedProduct?.id === updatedProduct.id ? 
+        updatedProduct : state.selectedProduct,
     }));
+  },
+  
+  setSelectedProduct: (product: Product | null) => {
+    set({ selectedProduct: product });
   },
   
   setError: (error: string | null) => set({ error }),

@@ -1,0 +1,179 @@
+{
+  "baking_ingredients": [
+    {
+      "item_number": "A5946",
+      "name": "Sysco Classic Cornflour",
+      "url": "https://www.brake.co.uk/dry-store/baking-mixes-ingredients/baking-ingredients/bakers-sundries/sysco-classic-cornflour/p/5946",
+      "image_url": "https://cdn.media.amplience.net/i/Brakes/5946_1?$plp-desktop$&fmt=auto",
+      "price": 11.85,
+      "price_per_unit": "£0.34/100g",
+      "pack_size": "1 x 3.5kg",
+      "unit": "3.5kg",
+      "available": true,
+      "badges": [
+        "Suitable for Vegetarians",
+        "Suitable for Vegans"
+      ],
+      "description": "Fine maize flour powder for use as a thickening agent. Blends to a smooth cream with liquid, reducing the need for fats.",
+      "applications": [
+        "Thickening sauces",
+        "Making custards",
+        "Creating gluten-free baked goods"
+      ],
+      "technicalDetails": "Ingredients: 100% corn starch. Store in a cool, dry place. Once opened, store in an airtight container."
+    },
+    {
+      "item_number": "B7241",
+      "name": "Organic Cane Sugar",
+      "image_url": "https://images.unsplash.com/photo-1581612129334-559ca0f15122?q=80&w=1000&auto=format&fit=crop",
+      "price": 8.50,
+      "pack_size": "1 x 5kg",
+      "unit": "5kg",
+      "available": true,
+      "badges": [
+        "Organic",
+        "Suitable for Vegetarians",
+        "Suitable for Vegans"
+      ],
+      "description": "Premium organic cane sugar with a rich, natural flavor. Perfect for all your baking needs.",
+      "applications": [
+        "Baking cakes and cookies",
+        "Sweetening beverages",
+        "Making desserts"
+      ],
+      "technicalDetails": "100% organic cane sugar. Non-GMO and chemical-free. Store in a cool, dry place."
+    }
+  ],
+  "dairy_and_alternatives": [
+    {
+      "item_number": "C1234",
+      "name": "Premium Dairy-Free Almond Milk",
+      "image_url": "https://images.unsplash.com/photo-1620040517732-c16acd9e0e57?q=80&w=1000&auto=format&fit=crop",
+      "price": 3.75,
+      "pack_size": "6 x 1L",
+      "unit": "1L",
+      "available": true,
+      "badges": [
+        "Dairy-Free",
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "description": "Creamy almond milk made from the finest almonds. Great alternative to dairy milk for beverages and cooking.",
+      "applications": [
+        "Coffee and tea",
+        "Smoothies and shakes",
+        "Baking and cooking"
+      ],
+      "technicalDetails": "Ingredients: Filtered water, almonds (2.5%), calcium carbonate, sea salt, stabilizers, vitamins D and B12."
+    },
+    {
+      "item_number": "C5678",
+      "name": "Organic Greek Yogurt",
+      "image_url": "https://images.unsplash.com/photo-1601411101851-ea0e07766035?q=80&w=1000&auto=format&fit=crop",
+      "price": 12.50,
+      "pack_size": "4 x 1kg",
+      "unit": "1kg",
+      "available": false,
+      "badges": [
+        "Organic",
+        "High Protein",
+        "Probiotic"
+      ],
+      "description": "Thick and creamy Greek yogurt made with organic milk. Rich in protein and probiotics.",
+      "applications": [
+        "Breakfast parfaits",
+        "Dips and sauces",
+        "Marinades"
+      ],
+      "technicalDetails": "Contains live cultures including Lactobacillus bulgaricus and Streptococcus thermophilus. Keep refrigerated at 2-5°C."
+    }
+  ],
+  "dry_goods": [
+    {
+      "item_number": "D9012",
+      "name": "Premium Basmati Rice",
+      "image_url": "https://images.unsplash.com/photo-1586201375761-83865001e31c?q=80&w=1000&auto=format&fit=crop",
+      "price": 22.99,
+      "pack_size": "1 x 10kg",
+      "unit": "10kg",
+      "available": true,
+      "badges": [
+        "Gluten-Free",
+        "Vegan",
+        "Long Grain"
+      ],
+      "description": "Aromatic basmati rice with long, fluffy grains. Perfect for a variety of cuisines.",
+      "applications": [
+        "Pilaf and biryani",
+        "Side dishes",
+        "Rice pudding"
+      ],
+      "technicalDetails": "Aged for 12 months for enhanced flavor and aroma. Store in a cool, dry place in an airtight container."
+    },
+    {
+      "item_number": "D3456",
+      "name": "Imported Italian Arborio Rice",
+      "image_url": "https://images.unsplash.com/photo-1623428296769-c3e28082a275?q=80&w=1000&auto=format&fit=crop",
+      "price": 18.75,
+      "pack_size": "5 x 1kg",
+      "unit": "1kg",
+      "available": true,
+      "badges": [
+        "Product of Italy",
+        "Risotto Rice",
+        "Medium Grain"
+      ],
+      "description": "Traditional Italian Arborio rice, perfect for creating authentic creamy risottos. Medium grain with high starch content.",
+      "applications": [
+        "Risotto",
+        "Rice pudding",
+        "Arancini"
+      ],
+      "technicalDetails": "Medium-grain rice with high amylopectin starch content. Store in a cool, dry place."
+    }
+  ],
+  "condiments_and_sauces": [
+    {
+      "item_number": "E7890",
+      "name": "Professional Chef's Mayonnaise",
+      "image_url": "https://images.unsplash.com/photo-1642682954155-63fd382e36c8?q=80&w=1000&auto=format&fit=crop",
+      "price": 15.25,
+      "pack_size": "2 x 5L",
+      "unit": "5L",
+      "available": true,
+      "badges": [
+        "Egg-Based",
+        "Gluten-Free",
+        "Chef Quality"
+      ],
+      "description": "Rich and creamy professional-grade mayonnaise. Perfect consistency for sandwiches, dressings, and dips.",
+      "applications": [
+        "Sandwich spreads",
+        "Base for dressings",
+        "Dips and sauces"
+      ],
+      "technicalDetails": "Made with free-range eggs. Contains egg, mustard. Shelf life of 6 months unopened. Refrigerate after opening."
+    },
+    {
+      "item_number": "E2345",
+      "name": "Authentic Thai Sweet Chilli Sauce",
+      "image_url": "https://images.unsplash.com/photo-1563599175592-c58dc214deff?q=80&w=1000&auto=format&fit=crop",
+      "price": 9.99,
+      "pack_size": "6 x 1L",
+      "unit": "1L",
+      "available": true,
+      "badges": [
+        "Thai Recipe",
+        "Medium Heat",
+        "Vegan"
+      ],
+      "description": "Authentic sweet and spicy Thai chilli sauce. Balanced flavor profile with notes of garlic and ginger.",
+      "applications": [
+        "Dipping sauce",
+        "Stir-fry glazes",
+        "Marinades"
+      ],
+      "technicalDetails": "Contains sugar, red chilli, garlic, vinegar. Heat level: medium. Shelf stable, refrigerate after opening."
+    }
+  ]
+}

@@ -12,8 +12,10 @@ import { useSampleData } from '@/hooks/useSampleData';
 import { useStore } from '@/store';
 
 export default function Home() {
-  const { isLoading, error } = useSampleData();
+  // Start with categorized data by default
+  const { isLoading, error, dataSource, toggleDataSource } = useSampleData(true);
   const products = useStore(state => state.products);
+  const resetToOriginal = useStore(state => state.resetToOriginal);
 
   return (
     <Layout>
@@ -28,7 +30,39 @@ export default function Home() {
         </div>
       ) : (
         <>
-          <FileUpload />
+          <div className="mb-6 flex flex-wrap gap-4">
+            <FileUpload />
+            
+            <div className="flex space-x-4">
+              <button
+                onClick={resetToOriginal}
+                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md shadow-sm transition-colors"
+              >
+                Reset Data
+              </button>
+              
+              <button
+                onClick={toggleDataSource}
+                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow-sm transition-colors"
+              >
+                {dataSource === 'categorized' 
+                  ? 'Switch to Flat Data' 
+                  : 'Switch to Categorized Data'}
+              </button>
+            </div>
+          </div>
+          
+          <div className="mb-4 p-3 bg-blue-50 rounded-md border border-blue-200">
+            <h3 className="font-medium text-blue-800">Current Data Format</h3>
+            <p className="text-sm text-blue-700">
+              {dataSource === 'categorized' 
+                ? 'Using categorized data structure where products are organized by category.' 
+                : 'Using flat data structure with all products in a single list.'}
+            </p>
+            <p className="text-xs text-blue-600 mt-1">
+              You can upload either CSV files or JSON files. JSON files can be flat arrays or category-structured objects.
+            </p>
+          </div>
           
           {products.length > 0 && (
             <>
@@ -55,7 +89,7 @@ export default function Home() {
               </svg>
               <h3 className="mt-2 text-sm font-medium text-gray-900">No products</h3>
               <p className="mt-1 text-sm text-gray-500">
-                Upload a CSV file or wait for data to load from Supabase.
+                Upload a CSV or JSON file, or wait for data to load from Supabase.
               </p>
             </div>
           )}

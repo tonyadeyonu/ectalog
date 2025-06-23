@@ -10,6 +10,9 @@ export interface Product {
   available: boolean;
   createdAt: string;
   updatedAt: string;
+  imageUrl?: string;
+  technicalDetails?: string;
+  applications?: string[];
   // Add any additional fields as needed
 }
 
@@ -18,19 +21,28 @@ export interface CSVRow {
   [key: string]: string | number | boolean | null;
 }
 
+// New JSON structure types
+export interface CategoryProducts {
+  [category: string]: Product[];
+}
+
 // Store state type
 export interface StoreState {
   // Original data from Supabase
   originalProducts: Product[];
   // Current edited data
   products: Product[];
+  // Selected product for detailed view
+  selectedProduct: Product | null;
   // Loading states
   isLoading: boolean;
   error: string | null;
   // Actions
   setProducts: (products: Product[]) => void;
+  setProductsFromCategoryStructure: (categoryData: CategoryProducts) => void;
   resetToOriginal: () => void;
   updateProduct: (updatedProduct: Product) => void;
+  setSelectedProduct: (product: Product | null) => void;
   setError: (error: string | null) => void;
   setLoading: (isLoading: boolean) => void;
   // Filter state
