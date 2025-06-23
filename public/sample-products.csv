@@ -1,0 +1,13 @@
+id,name,description,category,supplier,price,unit,available
+f47ac10b-58cc-4372-a567-0e02b2c3d479,Organic Cane Sugar,"Premium organic cane sugar, finely granulated and perfect for baking or sweetening beverages.",Sweeteners,Natural Ingredients Co.,2.99,lb,true
+e38f35e2-37a4-4fb3-a068-1c45d2b95b3c,Vanilla Bean Paste,"High-quality vanilla bean paste with real seeds, offering a rich and authentic vanilla flavor.",Flavorings,Global Flavors Inc.,12.50,oz,true
+d29f4a78-9021-4def-bc76-2d3569a2b540,Extra Virgin Olive Oil,"Cold-pressed extra virgin olive oil from Mediterranean olive groves, with a fruity aroma and peppery finish.",Oils,Mediterranean Imports,18.75,L,true
+c21e5a92-6f4c-4875-8e39-4b1c1f3d7891,Whole Wheat Flour,"Stone-ground whole wheat flour, perfect for hearty breads and rustic baked goods.",Flours,Heritage Mills,3.45,kg,true
+b13c4d56-7e80-42f9-a432-5a0b1e3c8762,Sea Salt Flakes,"Premium sea salt flakes harvested from pristine coastal waters, perfect as a finishing salt.",Seasonings,Coastal Harvest,8.99,oz,true
+a05b2e34-9c67-4d21-b876-3f4a5c2d1e0f,Almond Flour,"Finely ground blanched almond flour, perfect for gluten-free baking and French macarons.",Flours,Premium Nut Products,9.75,lb,true
+9f8e7d6c-5b4a-3210-9876-5a4b3c2d1e0f,Dried Shiitake Mushrooms,"Premium dried shiitake mushrooms with intense umami flavor, perfect for soups and stir-fries.",Specialty Items,Asian Import Specialists,14.50,oz,false
+8e7d6c5b-4a32-1098-7654-3a2b1c0d9e8f,Cocoa Powder,"Dutch-processed cocoa powder with rich chocolate flavor and dark color, perfect for baking.",Baking Ingredients,Confectionery Supplies Co.,7.25,lb,true
+7d6c5b4a-3210-9876-5432-1a0b9c8d7e6f,Honey,"Raw, unfiltered wildflower honey with a delicate floral aroma and smooth texture.",Sweeteners,Bee Natural Products,11.99,jar,true
+6c5b4a32-1098-7654-3210-9a8b7c6d5e4f,Saffron Threads,"Premium quality saffron threads from Spanish crocus flowers, offering intense color and aroma.",Spices,Global Spice Traders,24.99,g,true
+5b4a3210-9876-5432-1098-7a6b5c4d3e2f,Maple Syrup,"Pure Grade A maple syrup from Vermont, with a rich amber color and robust flavor.",Sweeteners,Northern Harvest,15.75,bottle,true
+4a321098-7654-3210-9876-5a4b3c2d1e0f,Balsamic Vinegar,"Aged balsamic vinegar from Modena, Italy, with a sweet and tangy flavor profile.",Vinegars,Mediterranean Imports,19.99,bottle,true
