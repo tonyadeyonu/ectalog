@@ -20,6 +20,8 @@ const ProductTable: React.FC = () => {
   const { tertiaryColor } = useSupplierTheme();
   const [data, setData] = useState<Product[]>([]);
   const [detailProduct, setDetailProduct] = useState<Product | null>(null);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportSuccess, setExportSuccess] = useState<string | null>(null);
 
   // Filter products based on search term and selected filters
   const filteredProducts = useMemo(() => {
@@ -51,11 +53,26 @@ const ProductTable: React.FC = () => {
   // Removed edit functionality as users should not be able to edit rows
 
   const handleExportClick = async () => {
+    if (isExporting) return; // Prevent multiple clicks
+    
+    // Clear any previous success message
+    setExportSuccess(null);
+    
     try {
+      setIsExporting(true);
       const filename = await exportToPdf(filteredProducts, tableRef);
       console.log(`PDF exported successfully as ${filename}`);
+      
+      // Show success message for 5 seconds
+      setExportSuccess(`PDF generated successfully as ${filename}`);
+      setTimeout(() => {
+        setExportSuccess(null);
+      }, 5000);
+      
     } catch (error) {
       console.error('Failed to export PDF:', error);
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -221,21 +238,46 @@ const ProductTable: React.FC = () => {
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className="flex justify-between items-center mb-2">
-        <h2 className="text-xl font-semibold">
-          Products ({filteredProducts.length})
-        </h2>
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">
+            Products ({filteredProducts.length})
+          </h2>
+          
+          <button
+            onClick={handleExportClick}
+            disabled={isExporting}
+            className="px-4 py-2 hover:opacity-90 text-white rounded-md shadow-sm transition-colors flex items-center space-x-2 disabled:opacity-70"
+            style={{ backgroundColor: 'var(--tertiary-color)' }}
+          >
+            {isExporting ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Generating PDF...</span>
+              </>
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
+                </svg>
+                <span>Export PDF</span>
+              </>
+            )}
+          </button>
+        </div>
         
-        <button
-          onClick={handleExportClick}
-          className="px-4 py-2 hover:opacity-90 text-white rounded-md shadow-sm transition-colors flex items-center space-x-2"
-          style={{ backgroundColor: 'var(--tertiary-color)' }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clipRule="evenodd" />
-          </svg>
-          <span>Export PDF</span>
-        </button>
+        {/* PDF Export Success Message */}
+        {exportSuccess && (
+          <div className="flex items-center p-2 bg-green-50 border border-green-200 rounded text-sm text-green-700">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-500" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+            </svg>
+            {exportSuccess}
+          </div>
+        )}
       </div>
       
       <div ref={tableRef} className="flex-1 border border-gray-300 rounded-md overflow-hidden">
@@ -354,7 +396,8 @@ const ProductTable: React.FC = () => {
       </div>
       
       <div className="text-sm text-gray-500 mt-2">
-        Click on a row or the view button to see detailed product information.
+        <p>Click on a row or the view button to see detailed product information.</p>
+        <p>Use the "Export PDF" button to download a PDF catalog of the products. Please note that PDF generation may take a few moments, especially for large datasets.</p>
       </div>
 
       {detailProduct && (

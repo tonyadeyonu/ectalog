@@ -46,10 +46,10 @@ export const usePdfExport = () => {
       // Add the image to the PDF
       doc.addImage(imgData, 'PNG', 10, 30, width, height);
       
-      // Add detailed product pages for products with images
-      const productsWithImages = products.filter(p => p.imageUrl);
+      // Add detailed product pages for all products (but load images if available)
+      const productsToDetail = products.slice(0, 20); // Limit to first 20 products to keep PDF size reasonable
       
-      if (productsWithImages.length > 0) {
+      if (productsToDetail.length > 0) {
         // Add a header for the detailed section
         doc.addPage();
         doc.setFontSize(16);
@@ -60,7 +60,7 @@ export const usePdfExport = () => {
         const pageWidth = doc.internal.pageSize.getWidth() - 2 * marginX;
         const imageMaxHeight = 60; // mm
         
-        for (const product of productsWithImages) {
+        for (const product of productsToDetail) {
           // Check if we need a new page
           if (currentY > doc.internal.pageSize.getHeight() - 40) {
             doc.addPage();
@@ -92,7 +92,7 @@ export const usePdfExport = () => {
                 // Add timeout to prevent hanging on image load
                 setTimeout(() => {
                   resolve(null);
-                }, 3000);
+                }, 5000); // Increased timeout to 5 seconds
               });
               
               // Create a canvas to draw the image
