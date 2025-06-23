@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useStore } from '@/store';
-import { CategoryProducts } from '@/types';
+import { CategoryProducts, Supplier } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 
-// Hook to load supplier data from the fixed supplier-data directory
-export const useSupplierData = () => {
+// Hook to load supplier data based on supplierId
+export const useSupplierData = (supplierId?: string) => {
   const { setProductsFromCategoryStructure, setLoading, setError } = useStore();
 
   useEffect(() => {
@@ -12,8 +12,26 @@ export const useSupplierData = () => {
       try {
         setLoading(true);
         
-        // Fetch data from the supplier products file
-        const response = await fetch('/supplier-data/products.json');
+        // First, fetch the suppliers list to get the correct file path
+        const suppliersResponse = await fetch('/supplier-data/suppliers.json');
+        
+        if (!suppliersResponse.ok) {
+          throw new Error(`HTTP error! Status: ${suppliersResponse.status}`);
+        }
+        
+        const suppliers = await suppliersResponse.json() as Supplier[];
+        
+        // Find the right supplier by ID or use the default (first one) if no ID is provided
+        const supplier = supplierId 
+          ? suppliers.find(s => s.id === supplierId) 
+          : suppliers[0];
+        
+        if (!supplier) {
+          throw new Error(`Supplier not found: ${supplierId}`);
+        }
+        
+        // Fetch data from the correct supplier products file
+        const response = await fetch(`/supplier-data/${supplier.products_file}`);
         
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
@@ -32,7 +50,7 @@ export const useSupplierData = () => {
     };
 
     fetchSupplierData();
-  }, [setProductsFromCategoryStructure, setLoading, setError]);
+  }, [supplierId, setProductsFromCategoryStructure, setLoading, setError]);
 
   return useStore(state => ({
     products: state.products,

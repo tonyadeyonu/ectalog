@@ -1,19 +1,40 @@
 import React from 'react';
 import { useSupplierTheme } from '@/hooks/useSupplierTheme';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
-const Navbar: React.FC = () => {
-  const { supplierName, logoUrl, primaryColor, secondaryColor } = useSupplierTheme();
+interface NavbarProps {
+  supplierId?: string;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ supplierId }) => {
+  const { 
+    supplierName, 
+    logoUrl, 
+    primaryColor, 
+    secondaryColor, 
+    tertiaryColor,
+    isDefaultTheme 
+  } = useSupplierTheme(supplierId);
+  
+  const pathname = usePathname();
   
   // Create a dynamic gradient style based on theme colors
   const navStyle = {
     background: `linear-gradient(to right, ${primaryColor}, ${secondaryColor})`,
   };
+
+  // Set subtitle based on current route/supplier
+  let subtitle = 'Supplier Directory';
+  if (!isDefaultTheme) {
+    subtitle = 'Product Catalog';
+  }
   
   return (
     <nav className="text-white shadow-md" style={navStyle}>
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center space-x-4">
+        <Link href="/" className="flex items-center space-x-4">
           {logoUrl ? (
             <div className="h-10 w-10 relative">
               <Image 
@@ -31,9 +52,27 @@ const Navbar: React.FC = () => {
           )}
           <div>
             <span className="font-bold text-xl">{supplierName}</span>
-            <div className="text-gray-100 text-sm">Product Catalog</div>
+            <div className="text-gray-100 text-sm">{subtitle}</div>
           </div>
-        </div>
+        </Link>
+        
+        {/* Navigation links - only show on supplier pages */}
+        {!isDefaultTheme && (
+          <div className="hidden md:flex space-x-4">
+            <Link 
+              href="/"
+              className="text-white hover:text-gray-200 transition-colors"
+            >
+              Home
+            </Link>
+            <Link 
+              href={pathname}
+              className="text-white hover:text-gray-200 transition-colors"
+            >
+              Products
+            </Link>
+          </div>
+        )}
       </div>
     </nav>
   );

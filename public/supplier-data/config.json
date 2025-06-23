@@ -1,10 +1,10 @@
 {
-  "supplier_name": "Gourmet Ingredients Co.",
-  "primary_color": "#0e4c92",
-  "secondary_color": "#1e7b45",
-  "tertiary_color": "#e6a817",
-  "logo_url": "https://images.unsplash.com/photo-1471967183320-ee018f6e114a?w=600&auto=format&fit=crop",
-  "contact_email": "info@gourmetingredients.example.com",
-  "contact_phone": "+1 (555) 123-4567",
-  "website": "https://www.gourmetingredients.example.com"
+  "supplier_name": "Brakes",
+  "primary_color": "#0088D8",
+  "secondary_color": "#4BB92C",
+  "tertiary_color": "#4BB92C",
+  "logo_url": "https://cdn.media.amplience.net/i/Brakes/brakes-and-sysco-logo",
+  "contact_email": "customer.services@brake.co.uk",
+  "contact_phone": "+44 (0345) 606-9090",
+  "website": "https://www.brake.co.uk"
 }

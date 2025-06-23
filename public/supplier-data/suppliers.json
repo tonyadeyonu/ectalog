@@ -1,0 +1,16 @@
+[
+  {
+    "id": "brake",
+    "name": "Brakes",
+    "description": "Providing high-quality ingredients for culinary professionals.",
+    "config_file": "config.json",
+    "products_file": "products.json"
+  },
+  {
+    "id": "webstaurant",
+    "name": "Webstaurant Store",
+    "description": "Restaurant equipment and food service supply company.",
+    "config_file": "webstaurant-config.json",
+    "products_file": "webstaurant_products_by_category_enriched.json"
+  }
+]

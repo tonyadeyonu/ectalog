@@ -29,6 +29,15 @@ export interface CategoryProducts {
   [category: string]: Product[];
 }
 
+// Supplier definition
+export interface Supplier {
+  id: string;
+  name: string;
+  description: string;
+  config_file: string;
+  products_file: string;
+}
+
 // Store state type
 export interface StoreState {
   // Original data from Supabase

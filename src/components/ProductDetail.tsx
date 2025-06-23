@@ -75,7 +75,7 @@ Thank you,
             <div>
               <div className="space-y-4">
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-700">Details</h3>
+                  <h3 className="text-lg font-semibold" style={{ color: 'var(--primary-color)' }}>Details</h3>
                   <dl className="mt-2 space-y-2">
                     <div className="grid grid-cols-3 gap-4">
                       <dt className="text-sm font-medium text-gray-500">Category</dt>
@@ -98,12 +98,12 @@ Thank you,
                       <dd className="text-sm text-gray-900 col-span-2 flex items-center">
                         {product.available ? (
                           <>
-                            <span className="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
+                            <span className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: 'var(--secondary-color)' }}></span>
                             <span>In Stock</span>
                           </>
                         ) : (
                           <>
-                            <span className="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
+                            <span className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: '#ef4444' }}></span>
                             <span>Out of Stock</span>
                           </>
                         )}
@@ -122,7 +122,14 @@ Thank you,
                         <dt className="text-sm font-medium text-gray-500">Badges</dt>
                         <dd className="text-sm text-gray-900 col-span-2 flex flex-wrap gap-2">
                           {product.badges.map((badge, index) => (
-                            <span key={index} className="px-2 py-1 bg-blue-100 text-blue-800 rounded-full text-xs">
+                            <span 
+                              key={index} 
+                              className="px-2 py-1 rounded-full text-xs" 
+                              style={{ 
+                                backgroundColor: `var(--primary-color)20`, 
+                                color: 'var(--primary-color)' 
+                              }}
+                            >
                               {badge}
                             </span>
                           ))}
@@ -133,20 +140,20 @@ Thank you,
                 </div>
                 
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-700">Description</h3>
+                  <h3 className="text-lg font-semibold" style={{ color: 'var(--primary-color)' }}>Description</h3>
                   <p className="mt-2 text-sm text-gray-600">{product.description}</p>
                 </div>
                 
                 {product.technicalDetails && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-700">Technical Details</h3>
+                    <h3 className="text-lg font-semibold" style={{ color: 'var(--primary-color)' }}>Technical Details</h3>
                     <p className="mt-2 text-sm text-gray-600">{product.technicalDetails}</p>
                   </div>
                 )}
                 
                 {product.applications && product.applications.length > 0 && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-700">Applications</h3>
+                    <h3 className="text-lg font-semibold" style={{ color: 'var(--primary-color)' }}>Applications</h3>
                     <ul className="mt-2 list-disc list-inside text-sm text-gray-600">
                       {product.applications.map((app, index) => (
                         <li key={index}>{app}</li>
@@ -159,7 +166,8 @@ Thank you,
               <div className="mt-8 flex justify-end">
                 <button
                   onClick={handleInquiryClick}
-                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md shadow-sm transition-colors"
+                  className="px-4 py-2 text-white rounded-md shadow-sm transition-colors"
+                  style={{ backgroundColor: 'var(--primary-color)', hover: 'opacity: 0.9' }}
                 >
                   Send Inquiry
                 </button>
