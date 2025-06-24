@@ -166,8 +166,8 @@ Thank you,
               <div className="mt-8 flex justify-end">
                 <button
                   onClick={handleInquiryClick}
-                  className="px-4 py-2 text-white rounded-md shadow-sm transition-colors"
-                  style={{ backgroundColor: 'var(--primary-color)', hover: 'opacity: 0.9' }}
+                  className="px-4 py-2 text-white rounded-md shadow-sm transition-colors hover:opacity-90"
+                  style={{ backgroundColor: 'var(--primary-color)' }}
                 >
                   Send Inquiry
                 </button>

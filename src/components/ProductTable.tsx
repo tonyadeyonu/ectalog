@@ -93,7 +93,7 @@ const ProductTable: React.FC = () => {
   const columnHelper = createColumnHelper<Product>();
 
   // Define columns
-  const columns = useMemo<ColumnDef<Product>[]>(() => [
+  const columns = useMemo(() => [
     columnHelper.accessor('name', {
       header: 'Product Name',
       cell: info => {

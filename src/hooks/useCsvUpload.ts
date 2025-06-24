@@ -38,7 +38,7 @@ export const useCsvUpload = () => {
             return;
           }
 
-          const products = results.data.map((row: CSVRow, index: number) => 
+          const products = (results.data as CSVRow[]).map((row, index) => 
             mapCsvRowToProduct(row, index)
           );
 
